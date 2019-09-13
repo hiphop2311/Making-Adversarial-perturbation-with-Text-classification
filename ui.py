@@ -75,5 +75,5 @@ class Ui_MyApp(object):
         self.label_2.setText(_translate("MyApp", "Select file:"))
         self.label_7.setText(_translate("MyApp", "Raw data:"))
         self.label_8.setText(_translate("MyApp", "Perturbed data:"))
-        self.predictButton_1.setText(_translate("MyApp", "Predict1"))
-        self.predictButton_2.setText(_translate("MyApp", "Predict2"))
+        self.predictButton_1.setText(_translate("MyApp", "Predict"))
+        self.predictButton_2.setText(_translate("MyApp", "Predict"))
