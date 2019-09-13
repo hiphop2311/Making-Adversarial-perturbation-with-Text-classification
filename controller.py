@@ -66,7 +66,7 @@ class MyApp(QMainWindow):
 
         self.prediction3 = self.predict(self.ui.plainTextEdit_3.toPlainText())
         # print(self.ui.plainTextEdit_3.toPlainText())
-        self.ui.label_predict_2.setText("Result perturb: " + self.prediction3)
+        self.ui.label_predict_2.setText("Result: " + self.prediction3)
         return
     def makePerturbation(self):
 
@@ -114,8 +114,7 @@ class MyApp(QMainWindow):
         # print(freq_word_idx)
 
         """make perturbation"""
-        temp_list = text_list
-        for idx,word in enumerate(temp_list):
+        for idx,word in enumerate(text_list):
             # print(idx,word)
         #     print("before:",text_list[idx])
         """ Swap character within the same word"""
