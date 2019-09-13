@@ -86,14 +86,14 @@ class MyApp(QMainWindow):
         text_list = text.split()
         new_word = [word for word in txt.split()]
 
-        print("new_word", new_word)
-        print("new_word_len", len(new_word))
+        # print("new_word", new_word)
+        # print("new_word_len", len(new_word))
         #   print(new_word)
         word_found = []
         for word in new_word:
             if word in self.sig_word:
                 word_found.append(word)
-        print("word_signi_found", word_found)
+        # print("word_signi_found", word_found)
         word_freq_found = []
         num_del = int(len(new_word)*0.1)
         for i in range(num_del):
@@ -111,26 +111,27 @@ class MyApp(QMainWindow):
             if self.preprocess.clean_txt(word) in word_freq_found:
                 freq_word_idx.append(idx)
 
-        print(freq_word_idx)
+        # print(freq_word_idx)
 
         """make perturbation"""
         temp_list = text_list
         for idx,word in enumerate(temp_list):
-            print(idx,word)
+            # print(idx,word)
         #     print("before:",text_list[idx])
+        """ Swap character within the same word"""
             temp = list(word)
             if idx in word_found_idx:
-                print("word found", word)
+                # print("word found", word)
                 ra,rb = random.randrange(0,len(temp),1),random.randrange(0,len(temp),1)
                 temp[ra], temp[rb] = temp[rb], temp[ra]
                 text_list[idx] =  "".join(temp)
-                print("swaped",text_list[idx])
+                # print("swaped",text_list[idx])
             else:
                 if random.randrange(0,100,1) < 30:
                     ra,rb = random.randrange(0,len(temp),1),random.randrange(0,len(temp),1)
                     temp[ra], temp[rb] = temp[rb], temp[ra]
                     text_list[idx] =  "".join(temp)
-
+            """ Character to graphically similar one"""
             for char in "AEIOUaeiou":
                 if random.randrange(0,100,1) < prob_vowel:
                     rand_char = random.choice(self.non_ascii_char[char])
@@ -140,43 +141,14 @@ class MyApp(QMainWindow):
                     if len(self.non_ascii_char[char])> 0:
                         rand_char = random.choice(self.non_ascii_char[char])
                         text_list[idx] = re.sub(char,rand_char,text_list[idx])
-            print(" ".join(text_list))
+            # print(" ".join(text_list))
 
         freq_word_idx.sort(reverse = True)
         if len(freq_word_idx) < int(len(text_list)/3):
             for idx in freq_word_idx:
                 del text_list[idx]
 
-
         return " ".join(text_list)
-
-
-        """make perturbation"""
-        # for idx in word_found_idx:
-        # #     print("before:",text_list[idx])
-        #     temp = list(text_list[idx])
-        #     if random.randrange(0,100,1) < 50:
-        #         ra,rb = random.randrange(0,len(temp),1),random.randrange(0,len(temp),1)
-        #         temp[ra], temp[rb] = temp[rb], temp[ra]
-        #     text_list[idx] =  "".join(temp)
-        # #     print("after:",text_list[idx])
-        #
-        #     for char in "AEIOUaeiou":
-        #         if random.randrange(0,100,1) < prob_vowel:
-        #             rand_char = random.choice(self.non_ascii_char[char])
-        #             text_list[idx] = re.sub(char,rand_char,text_list[idx])
-        #     for char in list(string.ascii_letters):
-        #         if random.randrange(0,100,1) < prob_ascii:
-        #             if len(self.non_ascii_char[char])> 0:
-        #                 rand_char = random.choice(self.non_ascii_char[char])
-        #                 tex
-        # freq_word_idx.sort(reverse = True)
-        # if len(freq_word_idx) < int(len(text_list)/3):
-        #     for idx in freq_word_idx:
-        #         del text_list[idx]
-        #
-        # print(" ".join(text_list))
-        # return " ".join(text_list)
 
 
 if __name__ == '__main__':
